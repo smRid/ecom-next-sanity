@@ -1,20 +1,33 @@
 import type { Metadata } from "next";
+import "../globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
 import Header from "@/components/Header";
+import { SanityLive } from "@/sanity/lib/live";
+
 
 export const metadata: Metadata = {
-  title: "Store - Shopinity",
-  description: "Browse our amazing products",
+  title: "Shopinity",
+  description: "Modern e-commerce store built with Next.js and Sanity",
 };
 
-export default function StoreLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <main>
-      <Header />
-      {children}
-    </main>
+    <ClerkProvider dynamic>
+      <html lang="en">
+        <body>
+          <main>
+            <Header/>
+            {children}
+          </main>
+
+          <SanityLive/>
+        </body>
+
+      </html>
+    </ClerkProvider>
   );
 }
