@@ -3,7 +3,7 @@ import ProductGrid from "./ProductGrid";
 
 interface ProductsViewProps {
   products: Product[];
-  categories: Category
+  categories: Category[];
 }
 
 const ProductsView = ({ products }: ProductsViewProps) => {
