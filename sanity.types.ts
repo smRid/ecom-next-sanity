@@ -281,6 +281,20 @@ export type SanityAssetSourceData = {
 
 export type AllSanitySchemaTypes = Sale | Order | Product | Category | BlockContent | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageHotspot | SanityImageCrop | SanityFileAsset | SanityImageAsset | SanityImageMetadata | Geopoint | Slug | SanityAssetSourceData;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./src/sanity/lib/products/getAllCategories.ts
+// Variable: ALL_CATEGORIES_QUERY
+// Query: *[ _type == "category"] | order(name asc)
+export type ALL_CATEGORIES_QUERYResult = Array<{
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: string;
+}>;
+
 // Source: ./src/sanity/lib/products/getAllProducts.ts
 // Variable: ALL_PRODUCTS_QUERY
 // Query: *[      _type == "product"    ] | order(name asc)
@@ -350,6 +364,7 @@ export type ALL_PRODUCTS_QUERYResult = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    "*[ _type == \"category\"] | order(name asc)": ALL_CATEGORIES_QUERYResult;
     "\n    *[\n      _type == \"product\"\n    ] | order(name asc)\n  ": ALL_PRODUCTS_QUERYResult;
   }
 }
