@@ -4,7 +4,6 @@ import { PortableText } from "next-sanity";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PortableTextComponents } from "@portabletext/react";
-import { Button } from "@/components/ui/button";
 import AddToBasketButton from "@/components/AddToBasketButton";
 
 // Custom components for PortableText rendering

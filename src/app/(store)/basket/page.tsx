@@ -8,7 +8,7 @@ import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Metadata } from "../../../../actions/createCheckoutSession";
+import { createCheckoutSession, Metadata } from "../../../../actions/createCheckoutSession";
 
 
 function BasketPage() {
