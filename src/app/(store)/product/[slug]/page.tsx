@@ -4,6 +4,8 @@ import { PortableText } from "next-sanity";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PortableTextComponents } from "@portabletext/react";
+import { Button } from "@/components/ui/button";
+import AddToBasketButton from "@/components/AddToBasketButton";
 
 // Custom components for PortableText rendering
 const portableTextComponents: PortableTextComponents = {
@@ -110,6 +112,13 @@ async function ProductPage({
                 <PortableText value={product.description} components={portableTextComponents} />
             )}
             </div>
+        </div>
+
+        <div className="mt-6">
+          <AddToBasketButton
+            product={product}
+            disabled={isOutOfStock}
+          />
         </div>
         </div>
         </div>

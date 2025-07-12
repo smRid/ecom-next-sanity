@@ -4,19 +4,15 @@ import { ClerkLoaded, SignedIn, SignInButton, UserButton, useUser } from "@clerk
 import Link from "next/link";
 import Form from "next/form";
 import { PackageIcon, TrolleyIcon } from "@sanity/icons";
+import useBasketStore from "@/lib/store";
 
 function Header(){
 
     const { user } = useUser();
+    const itemCount = useBasketStore((state) =>
+        state.items.reduce((total, item) => total + item.quantity, 0)
+    );
 
-    // const createClerkPasskey = async () => {
-    //     try {
-    //         const response = await user?.createPasskey();
-    //         console.log(response);
-    //     } catch (err) {
-    //         console.error("Error:", JSON.stringify(err, null, 2));
-    //     }
-    // };
 
 
     console.log(user);
@@ -42,7 +38,10 @@ function Header(){
                 className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
             >
                 <TrolleyIcon className="w-6 h-6"/>
-                {/* Span item count here */}
+
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+                    {itemCount}
+                </span>
                 <span>My Basket</span>
             </Link>
 
