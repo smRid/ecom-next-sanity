@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.24.0",
+    "@portabletext/react": "^3.2.1",
     "@radix-ui/react-slot": "^1.2.3",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^1.1.0",
@@ -25,11 +26,13 @@
     "react-dom": "^19.0.0",
     "sanity": "^3.98.1",
     "styled-components": "^6.1.19",
-    "tailwind-merge": "^3.3.1"
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
