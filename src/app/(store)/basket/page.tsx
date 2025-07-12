@@ -8,13 +8,8 @@ import { SignInButton, useAuth, useUser } from "@clerk/nextjs";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Metadata } from "../../../../actions/createCheckoutSession";
 
-export type Metadata = {
-    orderNumber: string;
-    customerName: string;
-    customerEmail: string;
-    clerkUserId: string;
-  };
 
 function BasketPage() {
   const groupedItems = useBasketStore((state) => state.getGroupedItems());
