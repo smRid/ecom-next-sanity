@@ -4,6 +4,9 @@ import { getMyOrders } from "@/sanity/lib/orders/getMyOrders";
 import { auth, currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { MY_ORDERS_QUERYResult } from "../../../../sanity.types";
+
+type OrderProduct = NonNullable<MY_ORDERS_QUERYResult[0]['products']>[0];
 
 async function Orders() {
   const { userId } = await auth();
@@ -16,7 +19,7 @@ async function Orders() {
   const user = await currentUser();
   const userEmail = user?.emailAddresses?.[0]?.emailAddress;
   
-  const orders = await getMyOrders(userId, userEmail);
+  const orders: MY_ORDERS_QUERYResult = await getMyOrders(userId, userEmail);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
@@ -31,7 +34,7 @@ async function Orders() {
           </div>
         ) : (
           <div className="space-y-6 sm:space-y-8">
-            {orders.map((order, orderIndex) => (
+            {orders.map((order: MY_ORDERS_QUERYResult[0], orderIndex: number) => (
               <div
                 key={`order-${order._id || order.orderNumber}-${orderIndex}`}
                 className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden"
@@ -97,7 +100,7 @@ async function Orders() {
                     Order Items
                   </p>
                   <div className="space-y-3 sm:space-y-4">
-                    {order.products?.map((product, index) => (
+                    {order.products?.map((product: OrderProduct, index: number) => (
                       <div
                         key={`${order.orderNumber}-${product._key || product.product?._id || index}`}
                         className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 py-2 border-b last:border-b-0"
