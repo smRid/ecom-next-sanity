@@ -13,9 +13,6 @@ function Header(){
         state.items.reduce((total, item) => total + item.quantity, 0)
     );
 
-
-
-    console.log(user);
   return (
     <header className="flex flex-wrap justify-between items-center px-4 py-2">
       {/* Top row */}
