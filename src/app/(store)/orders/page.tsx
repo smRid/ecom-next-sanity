@@ -1,7 +1,7 @@
 import { formatCurrency } from "@/lib/formatCurrency";
 import { imageUrl } from "@/lib/imageUrl";
 import { getMyOrders } from "@/sanity/lib/orders/getMyOrders";
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
@@ -12,7 +12,11 @@ async function Orders() {
     return redirect("/");
   }
 
-  const orders = await getMyOrders(userId);
+  // Get user details to access email
+  const user = await currentUser();
+  const userEmail = user?.emailAddresses?.[0]?.emailAddress;
+  
+  const orders = await getMyOrders(userId, userEmail);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
@@ -27,9 +31,9 @@ async function Orders() {
           </div>
         ) : (
           <div className="space-y-6 sm:space-y-8">
-            {orders.map((order) => (
+            {orders.map((order, orderIndex) => (
               <div
-                key={order.orderNumber}
+                key={`order-${order._id || order.orderNumber}-${orderIndex}`}
                 className="bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden"
               >
                 <div className="p-4 sm:p-6 border-b border-gray-200">
@@ -93,9 +97,9 @@ async function Orders() {
                     Order Items
                   </p>
                   <div className="space-y-3 sm:space-y-4">
-                    {order.products?.map((product) => (
+                    {order.products?.map((product, index) => (
                       <div
-                        key={product.product?._id}
+                        key={`${order.orderNumber}-${product._key || product.product?._id || index}`}
                         className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 py-2 border-b last:border-b-0"
                       >
                         <div className="flex items-center gap-3 sm:gap-4">
