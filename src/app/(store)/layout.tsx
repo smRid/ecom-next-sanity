@@ -12,6 +12,11 @@ import { DisableDraftMode } from "@/components/DisableDraftMode";
 export const metadata: Metadata = {
   title: "Shopinity",
   description: "Modern e-commerce store built with Next.js and Sanity",
+  icons: {
+    icon: "/LOGO.png",
+    shortcut: "/LOGO.png",
+    apple: "/LOGO.png",
+  },
 };
 
 export default async function RootLayout({
