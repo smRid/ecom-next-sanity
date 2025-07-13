@@ -40,8 +40,8 @@ export async function createCheckoutSession(
     }
 
     const baseUrl = process.env.NODE_ENV === 'production'
-    ? `https://${process.env.VERCEL_URL}`
-    : `${process.env.NEXT_PUBLIC_BASE_URL}`;
+    ? 'https://shopinity-smr.vercel.app'
+    : `${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}`;
 
     const successUrl = `${baseUrl}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`;
 
