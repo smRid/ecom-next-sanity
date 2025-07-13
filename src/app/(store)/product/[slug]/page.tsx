@@ -6,6 +6,9 @@ import { notFound } from "next/navigation";
 import { PortableTextComponents } from "@portabletext/react";
 import AddToBasketButton from "@/components/AddToBasketButton";
 
+export const dynamic = "force-static";
+export const revalidate = 60;
+
 // Custom components for PortableText rendering
 const portableTextComponents: PortableTextComponents = {
   block: {
@@ -64,6 +67,11 @@ async function ProductPage({
 }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
+
+  console.log(
+      crypto.randomUUID().slice(0, 5) +
+        ` >>> Rerendered the product page cache for ${slug}`
+  );
 
   if (!product) {
     return notFound()
