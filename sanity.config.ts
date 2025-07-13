@@ -27,7 +27,9 @@ export default defineConfig({
     visionTool({defaultApiVersion: apiVersion}),
     presentationTool({
       previewUrl: {
-        preview: "/",
+        preview: process.env.NODE_ENV === 'production'
+          ? 'https://shopinity-smr.vercel.app'
+          : 'http://localhost:3000',
         previewMode: {
           enable: "/draft-mode/enable",
         },
